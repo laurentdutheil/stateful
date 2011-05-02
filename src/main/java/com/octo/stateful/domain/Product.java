@@ -1,14 +1,13 @@
 package com.octo.stateful.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author ldu
  *         Date: 29/04/11 17:31
  */
 @Entity
+@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
 public class Product {
     @Id
     @GeneratedValue

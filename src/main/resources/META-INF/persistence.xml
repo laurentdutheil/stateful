@@ -26,6 +26,11 @@
 		-->
 
 		<jta-data-source>java:/DefaultDS</jta-data-source>
+
+        <class>com.octo.stateful.domain.Cart</class>
+        <class>com.octo.stateful.domain.CartLine</class>
+        <class>com.octo.stateful.domain.Product</class>
+
 		<properties>
 			<!-- Properties for Hibernate (default provider for JBoss AS) -->
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />

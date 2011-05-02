@@ -42,8 +42,7 @@
             <artifactId>primefaces</artifactId>
             <version>2.1</version>
         </dependency>
-
-	</dependencies>
+    </dependencies>
 
 	<repositories>
 		<!-- JBoss Repository used for hibernate-validator 4.0.0.GA and Java-ee spec-->

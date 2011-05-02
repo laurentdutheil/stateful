@@ -12,6 +12,9 @@ public class CartLine {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    private Cart cart;
+
     private Integer quantity;
 
     @OneToOne

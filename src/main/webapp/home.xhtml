@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:ui="http://java.sun.com/jsf/facelets"
-   xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:h="http://java.sun.com/jsf/html"
-   template="/WEB-INF/templates/template.xhtml">
-   <ui:define name="content">
-      <h1>Hello World!</h1>
-   </ui:define>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/template.xhtml">
+	<ui:define name="content">
+
+		<h:form id="form">
+			<h:commandButton action="#{cart.findCart}" value="New Cart" rendered="#{cart.currentCart == null}" />
+
+			<ui:repeat value="#{cart.currentCart.lines}" var="cartLine" rendered="#{cart.currentCart != null}">
+				<h:outputLabel value="Product label:" />
+				<h:outputText value="#{cartLine.product.label}" />
+				<h:outputLabel value="price:" />
+				<h:outputText value="#{cartLine.product.price}" />
+				<p:spinner value="#{cartLine.quantity}" >
+					<p:ajax update="totalCartLine,:form:grandTotal" event="change" listener="#{cart.updateCart}"/>
+				</p:spinner>
+				<h:outputLabel value="Total:"/>
+				<h:outputText id="totalCartLine" value="#{cartLine.total}"/>
+				<br />
+			</ui:repeat>
+			<h:outputLabel value="Total:" rendered="#{cart.currentCart != null}"/>
+			<h:outputText id="grandTotal" value="#{cart.currentCart.total}" rendered="#{cart.currentCart != null}"/>
+		</h:form>
+	</ui:define>
 </ui:composition>

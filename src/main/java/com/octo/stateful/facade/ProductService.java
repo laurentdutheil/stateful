@@ -30,6 +30,7 @@ public class ProductService {
 		return product;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Product> getAllProducts() {
 		return em.createNamedQuery("findAllProducts").getResultList();
 	}

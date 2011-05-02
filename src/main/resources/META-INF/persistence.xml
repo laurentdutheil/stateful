@@ -17,15 +17,13 @@
 
 		<!--
 			Glassfish Default Datasource
-			<jta-data-source>jdbc/__default</jta-data-source>
 		-->
+			<jta-data-source>jdbc/__default</jta-data-source>
 
 		<!--
 			JBoss Default Datasource
 			<jta-data-source>java:/DefaultDS</jta-data-source>
 		-->
-
-		<jta-data-source>java:/DefaultDS</jta-data-source>
 
         <class>com.octo.stateful.domain.Cart</class>
         <class>com.octo.stateful.domain.CartLine</class>

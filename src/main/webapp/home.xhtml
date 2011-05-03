@@ -8,22 +8,48 @@
 	<ui:define name="content">
 
 		<h:form id="form">
-			<h:commandButton action="#{cart.findCart}" value="New Cart" rendered="#{cart.currentCart == null}" />
+			<p:dataTable id="dataTable" var="cartLine"
+				value="#{cart.currentCart.lines}"
+				rendered="#{cart.currentCart != null}">
+				<p:column>
+					<f:facet name="header">Product</f:facet>
+					<h:outputText value="#{cartLine.product.label}" />
+				</p:column>
 
-			<ui:repeat value="#{cart.currentCart.lines}" var="cartLine" rendered="#{cart.currentCart != null}">
-				<h:outputLabel value="Product label:" />
-				<h:outputText value="#{cartLine.product.label}" />
-				<h:outputLabel value="price:" />
-				<h:outputText value="#{cartLine.product.price}" />
-				<p:spinner value="#{cartLine.quantity}" >
-					<p:ajax update="totalCartLine,:form:grandTotal" event="change" listener="#{cart.updateCart}"/>
-				</p:spinner>
-				<h:outputLabel value="Total:"/>
-				<h:outputText id="totalCartLine" value="#{cartLine.total}"/>
-				<br />
-			</ui:repeat>
-			<h:outputLabel value="Total:" rendered="#{cart.currentCart != null}"/>
-			<h:outputText id="grandTotal" value="#{cart.currentCart.total}" rendered="#{cart.currentCart != null}"/>
+				<p:column>
+					<f:facet name="header">Price</f:facet>
+					<h:outputText value="#{cartLine.product.price}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Quantity</f:facet>
+					<p:spinner value="#{cartLine.quantity}">
+						<p:ajax update="totalCartLine,form:dataTable:grandTotal,sideCartList,sideCartTotal"
+							event="change" listener="#{cart.updateCart}" />
+					</p:spinner>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Total</f:facet>
+					<h:outputText id="totalCartLine" value="#{cartLine.total}" />
+					<f:facet name="footer">
+						<h:outputText id="grandTotal" value="#{cart.currentCart.total}" />
+					</f:facet>
+				</p:column>
+
+			</p:dataTable>
+
 		</h:form>
+	</ui:define>
+
+	<ui:define name="sidebar">
+		<h1>Cart</h1>
+			<p:dataList id="sideCartList" var="cartLine"
+				value="#{cart.currentCart.lines}" itemType="none"
+				rendered="#{cart.currentCart != null}">
+				#{cartLine.quantity} of #{cartLine.product.label} : #{cartLine.total}
+			</p:dataList>
+			<h:outputLabel for="sideCartTotal" value="Total:"/>
+			<h:outputText id="sideCartTotal" value="#{cart.currentCart.total}" />
 	</ui:define>
 </ui:composition>

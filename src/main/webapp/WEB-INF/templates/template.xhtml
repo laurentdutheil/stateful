@@ -4,19 +4,19 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>${project.artifactId} Application</title>
+	<title>Stateful POC</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<h:outputStylesheet name="css/screen.css" />
 </h:head>
 <h:body>
 	<h:panelGroup id="page" layout="block">
 		<h:panelGroup id="header" layout="block">
-			<h1><a href="home.jsf">Stateful</a></h1>
+			<h1><a href="home.jsf">The Web Store</a></h1>
 		</h:panelGroup>
 
 		<h:panelGroup id="container" layout="block">
 			<h:panelGroup id="sidebar" layout="block">			
-			<h1>Sidebar</h1> Content for the sidebar goes here
+				<ui:insert name="sidebar">Content for the sidebar goes here</ui:insert>
 			</h:panelGroup>
 			<h:panelGroup id="content" layout="block">
 				<ui:insert name="content">Main Content</ui:insert>

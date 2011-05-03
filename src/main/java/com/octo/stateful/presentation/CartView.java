@@ -65,6 +65,12 @@ public class CartView {
 		return cartGateway.getCurrent();
 	}
 
+	/**
+	 * As the tags ui:repeat, p:DataGrid or p:DataList use only List, we have to
+	 * transform Set to List
+	 * 
+	 * @return List of CartLines
+	 */
 	public List<CartLine> getLinesAsList() {
 		return new ArrayList<CartLine>(cartGateway.getCurrent().getLines());
 	}

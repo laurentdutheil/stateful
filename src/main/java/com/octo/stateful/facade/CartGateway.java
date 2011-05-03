@@ -1,5 +1,6 @@
 package com.octo.stateful.facade;
 
+import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -41,6 +42,11 @@ public class CartGateway {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void save() {
+		// nothing to do
+	}
+
+	@Remove
+	public void closeGate() {
 		// nothing to do
 	}
 

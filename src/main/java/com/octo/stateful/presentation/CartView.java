@@ -1,11 +1,14 @@
 package com.octo.stateful.presentation;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
+import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
 
 import com.octo.stateful.domain.Cart;
 import com.octo.stateful.domain.CartLine;
@@ -18,7 +21,7 @@ import com.octo.stateful.facade.CartGateway;
 @ManagedBean(name = "cart")
 @SessionScoped
 public class CartView {
-	@EJB
+	@Inject
 	CartGateway cartGateway;
 
 	@PostConstruct
@@ -26,7 +29,7 @@ public class CartView {
 		// search the cart of the current user
 		// here, as we don't manager user, we create a new cart
 		Cart currentCart = new Cart();
-		currentCart.setLines(new ArrayList<CartLine>());
+		currentCart.setLines(new HashSet<CartLine>());
 		Product product1 = new Product();
 		product1.setLabel("product1");
 		product1.setPrice(10.0);
@@ -48,7 +51,16 @@ public class CartView {
 		return cartGateway.getCurrent();
 	}
 
+	public List<CartLine> getLinesAsList() {
+		return new ArrayList<CartLine>(cartGateway.getCurrent().getLines());
+	}
+
 	public void updateCart() {
 		cartGateway.save();
+	}
+
+	@PreDestroy
+	public void destroy() {
+		cartGateway.closeGate();
 	}
 }

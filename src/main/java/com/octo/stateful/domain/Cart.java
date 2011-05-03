@@ -1,8 +1,8 @@
 package com.octo.stateful.domain;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class Cart {
 	private Map<Product, CartLine> mapLines = new HashMap<Product, CartLine>();
 
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-	private List<CartLine> lines;
+	private Set<CartLine> lines;
 
 	public Long getId() {
 		return id;
@@ -34,11 +34,11 @@ public class Cart {
 		this.id = id;
 	}
 
-	public List<CartLine> getLines() {
+	public Set<CartLine> getLines() {
 		return lines;
 	}
 
-	public void setLines(List<CartLine> lines) {
+	public void setLines(Set<CartLine> lines) {
 		this.lines = lines;
 	}
 

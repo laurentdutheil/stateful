@@ -9,7 +9,7 @@
 
 		<h:form id="form">
 			<p:dataTable id="dataTable" var="cartLine"
-				value="#{cart.currentCart.lines}"
+				value="#{cart.linesAsList}"
 				rendered="#{cart.currentCart != null}">
 				<p:column>
 					<f:facet name="header">Product</f:facet>
@@ -45,7 +45,7 @@
 	<ui:define name="sidebar">
 		<h1>Cart</h1>
 			<p:dataList id="sideCartList" var="cartLine"
-				value="#{cart.currentCart.lines}" itemType="none"
+				value="#{cart.linesAsList}" itemType="none"
 				rendered="#{cart.currentCart != null}">
 				#{cartLine.quantity} of #{cartLine.product.label} : #{cartLine.total}
 			</p:dataList>

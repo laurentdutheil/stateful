@@ -29,19 +29,33 @@ public class CartView {
 		// search the cart of the current user
 		// here, as we don't manager user, we create a new cart
 		Cart currentCart = new Cart();
-		currentCart.setLines(new HashSet<CartLine>());
+		HashSet<CartLine> lines = new HashSet<CartLine>();
+
+		CartLine line1 = new CartLine();
 		Product product1 = new Product();
 		product1.setLabel("product1");
 		product1.setPrice(10.0);
-		currentCart.addProduct(product1);
+		line1.setQuantity(1);
+		line1.setProduct(product1);
+		lines.add(line1);
+
+		CartLine line2 = new CartLine();
 		Product product2 = new Product();
 		product2.setLabel("product2");
 		product2.setPrice(12.0);
-		currentCart.addProduct(product2);
+		line2.setQuantity(1);
+		line2.setProduct(product2);
+		lines.add(line2);
+
+		CartLine line3 = new CartLine();
 		Product product3 = new Product();
 		product3.setLabel("product3");
 		product3.setPrice(15.0);
-		currentCart.addProduct(product3);
+		line3.setQuantity(1);
+		line3.setProduct(product3);
+		lines.add(line3);
+
+		currentCart.setLines(lines);
 
 		cartGateway.create(currentCart);
 		cartGateway.save();

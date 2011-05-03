@@ -16,11 +16,15 @@ public class CartLine {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Cart cart;
 
 	private Integer quantity;
 
+	// CascadeType.ALL is here only for the POC, because we create a cart and
+	// some products on the first load
+	// in real life, the CascadeType.ALL is useless because the Products are
+	// already created
 	@OneToOne(cascade = CascadeType.ALL)
 	private Product product;
 

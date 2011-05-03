@@ -1,7 +1,5 @@
 package com.octo.stateful.domain;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 /**
  * @author ldu Date: 29/04/11 17:41
@@ -20,9 +17,8 @@ public class Cart {
 	@GeneratedValue
 	private Long id;
 
-	@Transient
-	private Map<Product, CartLine> mapLines = new HashMap<Product, CartLine>();
-
+	// the CascadeType.ALL is here because we want to update the lines when we
+	// update the cart
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
 	private Set<CartLine> lines;
 
@@ -42,26 +38,9 @@ public class Cart {
 		this.lines = lines;
 	}
 
-	public void addProduct(Product product) {
-		addProduct(1, product);
-	}
-
-	public void addProduct(Integer quantity, Product product) {
-		if (mapLines.containsKey(product)) {
-			mapLines.get(product).setQuantity(
-					mapLines.get(product).getQuantity() + quantity);
-		} else {
-			CartLine cartLine = new CartLine();
-			cartLine.setQuantity(quantity);
-			cartLine.setProduct(product);
-			lines.add(cartLine);
-			mapLines.put(product, cartLine);
-		}
-	}
-
 	public Double getTotal() {
 		Double total = 0.0;
-		for (CartLine line : mapLines.values()) {
+		for (CartLine line : lines) {
 			total += total + line.getTotal();
 		}
 		return total;

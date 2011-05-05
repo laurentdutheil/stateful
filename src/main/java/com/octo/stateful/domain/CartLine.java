@@ -4,7 +4,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -15,9 +14,6 @@ public class CartLine {
 	@Id
 	@GeneratedValue
 	private Long id;
-
-	@ManyToOne
-	private Cart cart;
 
 	private Integer quantity;
 
@@ -57,14 +53,6 @@ public class CartLine {
 
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
 	}
 
 }

@@ -19,7 +19,7 @@ public class Cart {
 
 	// the CascadeType.ALL is here because we want to update the lines when we
 	// update the cart
-	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<CartLine> lines;
 
 	public Long getId() {
